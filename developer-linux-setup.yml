@@ -45,6 +45,14 @@
   - name: Install virtual box extension pack
     shell: echo 'y' | vboxmanage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
 
+  - name: Add the user 'ronald' to the group of 'admin'
+    user:
+      name: ronald
+      append: yes
+      groups: vboxusers
+  
+      
+
   # TODO 
   # - Install Golang
   # - openjdk 1.13
