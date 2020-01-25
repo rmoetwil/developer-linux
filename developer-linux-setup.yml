@@ -6,57 +6,11 @@
   vars_files:
     - vars/main.yml
 
+  roles:
+    - common
+    - virtualbox
+  
   tasks:
-  - name: Run the equivalent of "apt-get update" as a separate step
-    apt:
-      update_cache: yes
-
-  - name: Install various generic packages
-    apt:
-      pkg:
-      - git
-      - ansible
-      - terminator
-      - snapd
-
-
-  # Install virtual box
-  - name: Add VirtualBox repo key
-    apt_key:
-      url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
-      state: present
-  
-  - apt_repository:
-      repo: deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian bionic contrib
-      state: present
-      update_cache: yes
-
-  - name: Install various packages
-    apt:
-      name: virtualbox-6.1
-      state: present
-
-  - name: Download VirtualBox extension pack
-    get_url:
-      url: "https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack"
-      dest: /tmp/
-      force: yes
-
-  - name: Install virtual box extension pack
-    shell: echo 'y' | vboxmanage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
-
-  - name: Add the user 'ronald' to the group of 'admin'
-    user:
-      name: ronald
-      append: yes
-      groups: vboxusers
-  
-      
-
-  # TODO 
-  # - Install Golang
-  # - openjdk 1.13
-
   # Install developer IDE's
   - name: Install developer IDE's via snap
     snap:
@@ -69,4 +23,11 @@
       - pycharm-professional
       - clion
 
-
+  # TODO 
+  # - Install Golang
+  # - openjdk 1.13
+  # - docker
+  # - zsh
+  # - kubernetes
+  # - Azure CLI
+        
