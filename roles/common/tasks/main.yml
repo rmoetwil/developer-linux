@@ -10,3 +10,24 @@
     - ansible
     - terminator
     - snapd
+    - python3-pip
+
+# Install virtualenv
+- pip:
+    executable: pip3
+    name: virtualenv    
+
+# Create some default directories
+- name: Creates directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: ronald
+    group: ronald
+    mode: 0755
+  with_items:
+    - /home/ronald/data/environments
+    - /home/ronald/data/github/rmoetwil
+    
+
+
