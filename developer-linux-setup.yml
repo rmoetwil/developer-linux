@@ -11,8 +11,7 @@
     - virtualbox
   
   tasks:
-  # Install developer IDE's
-  - name: Install developer IDE's via snap
+  - name: Install various snap packages
     snap:
       name: "{{ item }}"
       classic: yes
@@ -22,12 +21,27 @@
       - goland
       - pycharm-professional
       - clion
+      - go
+      - docker
+      - kubectl
+
+  - name: Post docker installation steps
+    group:
+      name: docker
+      state: present
+
+  - name: Add the user 'ronald' to the group of 'docker'
+    user:
+      name: ronald
+      append: yes
+      groups: docker
+
+  # TODO Azure CLI install doesn't work with Linux Mint Tricia
+  # - name: Install Azure CLI
+  #   shell: curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
 
   # TODO 
-  # - Install Golang
   # - openjdk 1.13
-  # - docker
   # - zsh
-  # - kubernetes
-  # - Azure CLI
-        
+  
