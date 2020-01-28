@@ -39,9 +39,4 @@
   # TODO Azure CLI install doesn't work with Linux Mint Tricia
   # - name: Install Azure CLI
   #   shell: curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-
-
-  # TODO 
-  # - openjdk 1.13
-  # - zsh
   

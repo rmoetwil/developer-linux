@@ -11,6 +11,7 @@
     - terminator
     - snapd
     - python3-pip
+    - zsh
 
 # Install virtualenv
 - pip:
@@ -28,6 +29,12 @@
   with_items:
     - /home/ronald/data/environments
     - /home/ronald/data/github/rmoetwil
-    
 
+#
+# TODO This install only works the 1st time
+#
+# - name: Install Oh my Zsh
+#   shell: echo Y | sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#   become: yes
+#   become_user: ronald
 
