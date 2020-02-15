@@ -23,7 +23,7 @@
       - clion
       - go
       - docker
-      - kubectl
+      - microk8s
 
   - name: Post docker installation steps
     group:
