@@ -9,6 +9,7 @@
   roles:
     - common
     - virtualbox
+    - terraform
   
   tasks:
   - name: Install various snap packages
@@ -25,7 +26,7 @@
       - docker
       - microk8s
 
-  - name: Snap does not update packages only checks existence, rfresh with shell command
+  - name: Snap does not update packages only checks existence, refresh with shell command
     shell: snap refresh
 
   - name: Post docker installation steps
