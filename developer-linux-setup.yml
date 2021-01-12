@@ -69,3 +69,7 @@
       line: 'export PATH="$PATH:/snap/bin"'
       regexp: '^export PATH="$PATH:/snap/bin"'
       insertafter: EOF
+
+  - name: Add Vagrant
+    apt:
+      deb: https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
