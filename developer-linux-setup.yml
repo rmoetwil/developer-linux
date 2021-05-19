@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: all
   user: ronald
   become: yes
 

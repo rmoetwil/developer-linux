@@ -20,3 +20,5 @@ Make sure you updated the hosts file in this project to reflect your machine's i
 (Or make any changes to the way the playbook has been setup ;-) )
 
 Run the following statement to execute the playbook: `ansible-playbook developer-linux-setup.yml --ask-pass --ask-become-pass`.
+
+Or to run it locally: `ansible-playbook -l localhost developer-linux-setup.yml --ask-become-pass`
