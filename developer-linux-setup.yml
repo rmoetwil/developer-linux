@@ -59,10 +59,33 @@
       append: yes
       groups: microk8s
 
-  # TODO Azure CLI install doesn't work with Linux Mint Tricia
-  # - name: Install Azure CLI
-  #   shell: curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-  
+  - name: IPtables FORWARD policy ACCEPT for k8s networking
+    command: iptables -P FORWARD ACCEPT 
+
+  # Azure CLI install the hard way
+  # https://github.com/Azure/azure-cli/issues/12758
+  # https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+
+  - name: Azure CLI install the hard way
+    shell: |
+      curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+      AZ_REPO=$( cat /etc/upstream-release/lsb-release | grep -Po 'DISTRIB_CODENAME=\K.*')
+      echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list
+    args:
+      executable: /bin/bash
+
+  - name: Run the equivalent of "apt-get update" as a separate step
+    apt:
+      update_cache: yes
+
+  - name: Install various generic packages
+    apt:
+      pkg:
+      - azure-cli
+
+  - name: Upgrade Azure CLI
+    command: az upgrade --yes
+
   # Looks like snap/bin is not added to the path on remote ssh. Why? This is a quick fix
   - name: Add kubectl alias for microk8s kubectl
     lineinfile:

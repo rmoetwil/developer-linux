@@ -12,6 +12,7 @@
     - snapd
     - python3-pip
     - zsh
+    - iptables-persistent
 
 - name: Install virtualenv
   pip:
