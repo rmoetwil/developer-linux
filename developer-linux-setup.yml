@@ -26,6 +26,7 @@
       - docker
       - microk8s
       - helm
+      - kubectl
 
   - name: Snap does not update packages only checks existence, refresh with shell command
     shell: snap refresh
