@@ -12,16 +12,16 @@
 - name: Install virtualbox
   apt:
     name: virtualbox-6.1
-    state: present
+    state: latest
 
 - name: Download VirtualBox extension pack
   get_url:
-    url: "https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack"
+    url: "https://download.virtualbox.org/virtualbox/6.1.26/Oracle_VM_VirtualBox_Extension_Pack-6.1.26.vbox-extpack"
     dest: /tmp/
     force: yes
 
 - name: Install virtual box extension pack
-  shell: echo 'y' | vboxmanage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
+  shell: echo 'y' | vboxmanage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-6.1.26.vbox-extpack
 
 - name: Add the user 'ronald' to the group of 'vboxusers'
   user:
