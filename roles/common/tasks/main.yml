@@ -13,6 +13,7 @@
     - python3-pip
     - zsh
     - iptables-persistent
+    - openjdk-17-jdk
 
 - name: Install virtualenv
   pip:
