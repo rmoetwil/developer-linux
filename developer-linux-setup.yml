@@ -88,7 +88,7 @@
     command: az upgrade --yes
 
   # Looks like snap/bin is not added to the path on remote ssh. Why? This is a quick fix
-  - name: Add kubectl alias for microk8s kubectl
+  - name: Add snap/bin to the path
     lineinfile:
       path: /home/ronald/.zshrc
       line: 'export PATH="$PATH:/snap/bin"'
