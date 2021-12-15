@@ -42,12 +42,16 @@
       append: yes
       groups: docker
 
-  - name: Add kubectl alias for microk8s kubectl
-    lineinfile:
-      path: /home/ronald/.zshrc
-      line: "alias kubectl='microk8s kubectl'"
-      regexp: "^alias kubectl='microk8s kubectl'"
-      insertafter: EOF
+  # Disabled kubectl alias in favor of independent install.
+  # Make sure to copy kubeconfig. 
+  # See: https://microk8s.io/docs/working-with-kubectl
+  #
+  # - name: Add kubectl alias for microk8s kubectl
+  #   lineinfile:
+  #     path: /home/ronald/.zshrc
+  #     line: "alias kubectl='microk8s kubectl'"
+  #     regexp: "^alias kubectl='microk8s kubectl'"
+  #     insertafter: EOF
 
   - name: Post microk8s installation steps
     group:
