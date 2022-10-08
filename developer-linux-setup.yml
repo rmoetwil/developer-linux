@@ -99,18 +99,34 @@
       regexp: '^export PATH="$PATH:/snap/bin"'
       insertafter: EOF
 
-  - name: Add kubectx and kubens for easy switching context and namespaces
-    shell: |
-      git clone https://github.com/ahmetb/kubectx /opt/kubectx
-      ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
-      ln -s /opt/kubectx/kubens /usr/local/bin/kubens
-      mkdir -p ~/.oh-my-zsh/completions
-      chmod -R 755 ~/.oh-my-zsh/completions
-      ln -s /opt/kubectx/completion/_kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
-      ln -s /opt/kubectx/completion/_kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh      
-    args:
-      executable: /bin/bash
+ # FIXME 20220820 Errors whilee creating symbolic link
+  # - name: Add kubectx and kubens for easy switching context and namespaces
+  #   shell: |
+  #     git clone https://github.com/ahmetb/kubectx /opt/kubectx
+  #     ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+  #     ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+  #     mkdir -p ~/.oh-my-zsh/completions
+  #     chmod -R 755 ~/.oh-my-zsh/completions
+  #     ln -s /opt/kubectx/completion/_kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
+  #     ln -s /opt/kubectx/completion/_kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh      
+  #   args:
+  #     executable: /bin/bash
 
   - name: Add Vagrant
     apt:
       deb: https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb
+
+  ### Install some new things. Move this to roles later
+  # - name: Download kustomize
+  #   ansible.builtin.get_url:
+  #     url: https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh
+  #     dest: /tmp/install_kustomize.sh
+
+  # - name: Run kustomize
+  #   shell: "cat /tmp/install_kustomize.sh | bash | mv kustomize /usr/local/bin/kustomize"
+
+
+  # - name: Install poetry
+  #   shell: "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -"
+
+

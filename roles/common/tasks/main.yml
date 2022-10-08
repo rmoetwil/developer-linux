@@ -15,6 +15,10 @@
     - iptables-persistent
     - openjdk-17-jdk
     - maven
+#    - emu-kvm
+#    - libvirt-daemon
+#    - libvirt-daemon-system
+#    - network-manager
 
 - name: Install virtualenv
   pip:
