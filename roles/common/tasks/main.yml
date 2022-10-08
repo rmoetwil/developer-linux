@@ -15,6 +15,7 @@
     - iptables-persistent
     - openjdk-17-jdk
     - maven
+    - jq
 #    - emu-kvm
 #    - libvirt-daemon
 #    - libvirt-daemon-system

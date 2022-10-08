@@ -129,4 +129,5 @@
   # - name: Install poetry
   #   shell: "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -"
 
-
+  - name: Install yq
+    shell: "wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && chmod a+x /usr/local/bin/yq"
