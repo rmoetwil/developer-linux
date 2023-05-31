@@ -16,6 +16,7 @@
     - openjdk-17-jdk
     - maven
     - jq
+    - build-essential
 #    - emu-kvm
 #    - libvirt-daemon
 #    - libvirt-daemon-system

@@ -114,7 +114,7 @@
 
   - name: Add Vagrant
     apt:
-      deb: https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb
+      deb: https://releases.hashicorp.com/vagrant/2.3.6/vagrant_2.3.6-1_i686.deb
 
   ### Install some new things. Move this to roles later
   # - name: Download kustomize
