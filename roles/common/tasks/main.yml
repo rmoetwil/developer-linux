@@ -13,6 +13,14 @@
     - python3-pip
     - zsh
     - iptables-persistent
+    - openjdk-17-jdk
+    - maven
+    - jq
+    - build-essential
+#    - emu-kvm
+#    - libvirt-daemon
+#    - libvirt-daemon-system
+#    - network-manager
 
 - name: Install virtualenv
   pip:
@@ -38,4 +46,3 @@
 #   shell: echo Y | sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #   become: yes
 #   become_user: ronald
-

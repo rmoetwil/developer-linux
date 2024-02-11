@@ -42,12 +42,16 @@
       append: yes
       groups: docker
 
-  - name: Add kubectl alias for microk8s kubectl
-    lineinfile:
-      path: /home/ronald/.zshrc
-      line: "alias kubectl='microk8s kubectl'"
-      regexp: "^alias kubectl='microk8s kubectl'"
-      insertafter: EOF
+  # Disabled kubectl alias in favor of independent install.
+  # Make sure to copy kubeconfig. 
+  # See: https://microk8s.io/docs/working-with-kubectl
+  #
+  # - name: Add kubectl alias for microk8s kubectl
+  #   lineinfile:
+  #     path: /home/ronald/.zshrc
+  #     line: "alias kubectl='microk8s kubectl'"
+  #     regexp: "^alias kubectl='microk8s kubectl'"
+  #     insertafter: EOF
 
   - name: Post microk8s installation steps
     group:
@@ -88,13 +92,53 @@
     command: az upgrade --yes
 
   # Looks like snap/bin is not added to the path on remote ssh. Why? This is a quick fix
-  - name: Add kubectl alias for microk8s kubectl
+  - name: Add snap/bin to the path
     lineinfile:
       path: /home/ronald/.zshrc
       line: 'export PATH="$PATH:/snap/bin"'
       regexp: '^export PATH="$PATH:/snap/bin"'
       insertafter: EOF
 
+ # FIXME 20220820 Errors whilee creating symbolic link
+  # - name: Add kubectx and kubens for easy switching context and namespaces
+  #   shell: |
+  #     git clone https://github.com/ahmetb/kubectx /opt/kubectx
+  #     ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+  #     ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+  #     mkdir -p ~/.oh-my-zsh/completions
+  #     chmod -R 755 ~/.oh-my-zsh/completions
+  #     ln -s /opt/kubectx/completion/_kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
+  #     ln -s /opt/kubectx/completion/_kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh      
+  #   args:
+  #     executable: /bin/bash
+
   - name: Add Vagrant
     apt:
-      deb: https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
+      deb: https://releases.hashicorp.com/vagrant/2.3.6/vagrant_2.3.6-1_i686.deb
+
+  ### Install some new things. Move this to roles later
+  # - name: Download kustomize
+  #   ansible.builtin.get_url:
+  #     url: https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh
+  #     dest: /tmp/install_kustomize.sh
+
+  # - name: Run kustomize
+  #   shell: "cat /tmp/install_kustomize.sh | bash | mv kustomize /usr/local/bin/kustomize"
+
+
+  # - name: Install poetry
+  #   shell: "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -"
+
+  - name: Install yq
+    shell: "wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && chmod a+x /usr/local/bin/yq"
+
+  # - name: Install krew
+  #   shell: "./scripts/krew-install.sh"
+
+  - name: Add krew to the path
+    lineinfile:
+      path: /home/ronald/.zshrc
+      line: 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
+      regexp: '^export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
+      insertafter: EOF
+
